@@ -37,6 +37,7 @@
     ManaFlux = 25,
     UnstableMana = 26,
     Meditate = 27,
+    Bloodrite = 28,
 
 
 

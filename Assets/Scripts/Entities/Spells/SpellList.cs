@@ -59,6 +59,7 @@ static class SpellList
     //static internal readonly Spell Warp;
     //static internal readonly DamageSpell MagicWall;
     static internal readonly StatusSpell Poison;
+    static internal readonly StatusSpell Bloodrite;
 
     //Quicksand
     static internal readonly StatusSpell PreysCurse;
@@ -387,6 +388,27 @@ static class SpellList
             },
         };
         SpellDict[SpellTypes.Poison] = Poison;
+
+        Bloodrite = new StatusSpell()
+        {
+            Name = "Bloodrite",
+            Id = "bloodrite",
+            SpellType = SpellTypes.Bloodrite,
+            Description = "Target sacrifices all of thier mama and 1/2 of their current hp for double melee and ranged damage for 15 turns",
+            AcceptibleTargets = new List<AbilityTargets>() { AbilityTargets.Self },
+            Range = new Range(1),
+            Tier = 0,
+            Resistable = false,
+            OnExecute = (a, t) =>
+            {
+                a.CastSpell(Bloodrite, t);
+                a.Unit.SpendMana(a.Unit.Mana);
+                t.Unit.StatusEffects.Add(new StatusEffect(StatusEffectType.Bloodrite, 1f, 16));
+                t.Unit.Heal(-(t.Unit.Health) / 2);
+                TacticalGraphicalEffects.CreateGenericMagic(a.Position, t.Position, t, TacticalGraphicalEffects.SpellEffectIcon.Buff);
+            },
+        };
+        SpellDict[SpellTypes.Bloodrite] = Bloodrite;
 
         PreysCurse = new StatusSpell()
         {

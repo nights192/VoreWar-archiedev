@@ -60,5 +60,9 @@
     Virus = 28,
     /// <summary>Unit has been embraced by the heavens, providing damage mitigation for a few turns</summary>
     DivineShield = 29,
+    /// <summary>Unit's damage is increased by 100%</summary>
+    Bloodrite = 32,
+    /// <summary>Unit restores themselves 10 mana mid-battles</summary>
+    Meditate = 33,
 }
 

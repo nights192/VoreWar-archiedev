@@ -29,6 +29,7 @@ public enum ItemType
     //Warp
     //Magic Wall
     Poison,
+    Bloodrite,
     //Quicksand
     PreysCurse,
     Maw,
@@ -114,6 +115,7 @@ public class ItemRepository
             //new SpellBook("Warp Book", "Allows the casting of Warp", 60, 2, SpellTypes.Warp),
             //new SpellBook("Magic Wall Book", "Allows the casting of Magic Wall", 60, 2, SpellTypes.MagicWall),           
             new SpellBook("Poison Book", "Allows the casting of Poison", 60, 2, SpellTypes.Poison),            
+            new SpellBook("Bloodrite Book", "Allows the casting of Bloodrite", 60, 2, SpellTypes.Bloodrite),
             //new SpellBook("Quicksand Book", "Allows the casting of Quicksand", 90, 3, SpellTypes.Quicksand),
             new SpellBook("Prey's Curse Book", "Allows the casting of Prey's Curse", 90, 3, SpellTypes.PreysCurse),
             new SpellBook("Maw Book", "Allows the casting of Maw", 90, 3, SpellTypes.Maw),
