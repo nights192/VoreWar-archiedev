@@ -394,7 +394,7 @@ static class SpellList
             Name = "Bloodrite",
             Id = "bloodrite",
             SpellType = SpellTypes.Bloodrite,
-            Description = "Target sacrifices all of thier mama and 1/2 of their current hp for 250% damage for 15 turns",
+            Description = "Target sacrifices 1/2 of their current hp for 250% damage for 15 turns",
             AcceptibleTargets = new List<AbilityTargets>() { AbilityTargets.Self },
             Range = new Range(1),
             Tier = 0,
@@ -402,7 +402,7 @@ static class SpellList
             OnExecute = (a, t) =>
             {
                 a.CastSpell(Bloodrite, t);
-                a.Unit.SpendMana(a.Unit.Mana);
+                a.Unit.UseableSpells.Remove(SpellList.Bloodrite);
                 t.Unit.StatusEffects.Add(new StatusEffect(StatusEffectType.Bloodrite, 1f, 16));
                 t.Unit.Heal(-(t.Unit.Health) / 2);
                 TacticalGraphicalEffects.CreateGenericMagic(a.Position, t.Position, t, TacticalGraphicalEffects.SpellEffectIcon.Buff);

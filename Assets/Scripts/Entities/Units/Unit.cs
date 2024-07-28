@@ -2507,11 +2507,16 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
     public void UpdateSpells()
     {
         UseableSpells = new List<Spell>();
+
         if (InnateSpells != null)
         {
             foreach (SpellTypes type in InnateSpells)
             {
-                if (SpellList.SpellDict.TryGetValue(type, out Spell spell))
+                if (GetStatusEffect(StatusEffectType.Bloodrite) != null)
+                {
+                    UseableSpells.Remove(SpellList.Bloodrite);
+                }
+                else if (SpellList.SpellDict.TryGetValue(type, out Spell spell))
                 {
                     UseableSpells.Add(spell);
                 }
@@ -2573,9 +2578,9 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
                 continue;
             if (item is SpellBook book)
             {
-                if (HasTrait(Traits.Feral))
+                if (GetStatusEffect(StatusEffectType.Bloodrite) != null)
                 {
-                    continue;
+                    UseableSpells.Remove(SpellList.Bloodrite);
                 }
                 else if (SpellList.SpellDict.TryGetValue(book.ContainedSpell, out Spell spell))
                 {
