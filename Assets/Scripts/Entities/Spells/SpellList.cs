@@ -59,6 +59,7 @@ static class SpellList
     //static internal readonly Spell Warp;
     //static internal readonly DamageSpell MagicWall;
     static internal readonly StatusSpell Poison;
+    static internal readonly DamageSpell ForcePulse;
     static internal readonly StatusSpell Bloodrite;
 
     //Quicksand
@@ -389,12 +390,51 @@ static class SpellList
         };
         SpellDict[SpellTypes.Poison] = Poison;
 
+        ForcePulse = new DamageSpell()
+        {
+            Name = "Force Pulse",
+            Id = "forcepulse",
+            SpellType = SpellTypes.ForcePulse,
+            Description = "Deals damage in an area and knocks back enemies",
+            AcceptibleTargets = new List<AbilityTargets>() { AbilityTargets.Enemy, AbilityTargets.Tile },
+            Range = new Range(6),
+            AreaOfEffect = 1,
+            Tier = 1,
+            Resistable = true,
+            Damage = (a, t) => 3 + a.Unit.GetStat(Stat.Mind) / 10,
+            OnExecute = (a, t) =>
+            {
+                a.CastOffensiveSpell(ForcePulse, t);
+                float pulseDamage = 3f;
+                foreach (var splashTarget in TacticalUtilities.UnitsWithinTiles(t.Position, ForcePulse.AreaOfEffect))
+                {
+                    TacticalUtilities.CheckSpellKnockBack(t.Position, a, splashTarget, ref pulseDamage);
+                    TacticalUtilities.SpellKnockBack(t.Position, a, splashTarget);
+                }
+                TacticalUtilities.CheckKnockBack(a, t, ref pulseDamage);
+                TacticalUtilities.KnockBack(a, t);
+                TacticalGraphicalEffects.CreateGenericMagic(a.Position, t.Position, t);
+            },
+            OnExecuteTile = (a, l) =>
+            {
+                a.CastOffensiveSpell(ForcePulse, null, l);
+                float pulseDamage = 3f;
+                foreach (var splashTarget in TacticalUtilities.UnitsWithinTiles(l, ForcePulse.AreaOfEffect))
+                {
+                    TacticalUtilities.CheckSpellKnockBack(l, a, splashTarget, ref pulseDamage);
+                    TacticalUtilities.SpellKnockBack(l, a, splashTarget);
+                }
+                TacticalGraphicalEffects.CreateGenericMagic(a.Position, l, null);
+            },
+        };
+        SpellDict[SpellTypes.ForcePulse] = ForcePulse;
+
         Bloodrite = new StatusSpell()
         {
             Name = "Bloodrite",
             Id = "bloodrite",
             SpellType = SpellTypes.Bloodrite,
-            Description = "Target sacrifices 1/2 of their current hp for 250% damage for 15 turns",
+            Description = "Target sacrifices 1/2 of their current hp for 250% damage for 10 turns",
             AcceptibleTargets = new List<AbilityTargets>() { AbilityTargets.Self },
             Range = new Range(1),
             Tier = 0,
@@ -403,7 +443,7 @@ static class SpellList
             {
                 a.CastSpell(Bloodrite, t);
                 a.Unit.UseableSpells.Remove(SpellList.Bloodrite);
-                t.Unit.StatusEffects.Add(new StatusEffect(StatusEffectType.Bloodrite, 1f, 16));
+                t.Unit.StatusEffects.Add(new StatusEffect(StatusEffectType.Bloodrite, 1f, 11));
                 t.Unit.Heal(-(t.Unit.Health) / 2);
                 TacticalGraphicalEffects.CreateGenericMagic(a.Position, t.Position, t, TacticalGraphicalEffects.SpellEffectIcon.Buff);
             },

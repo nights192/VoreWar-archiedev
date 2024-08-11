@@ -39,7 +39,7 @@
     Meditate = 27,
     Bloodrite = 28,
 
-
+    ForcePulse = 35,
 
     AlraunePuff = 70,
     Web = 71,
@@ -56,7 +56,7 @@
     AssumeForm = 112,
     RevertForm = 113,
     ManaExpolsion = 114,
-    Conduit = 115,
-    Flamberge = 116,
+
+
 }
 
