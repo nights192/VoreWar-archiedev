@@ -2578,7 +2578,11 @@ internal void SetGenderRandomizeName(Race race, Gender gender)
                 continue;
             if (item is SpellBook book)
             {
-                if (GetStatusEffect(StatusEffectType.Bloodrite) != null)
+                if (HasTrait(Traits.Feral))
+                {
+                    continue;
+                }
+                else if (GetStatusEffect(StatusEffectType.Bloodrite) != null)
                 {
                     UseableSpells.Remove(SpellList.Bloodrite);
                 }
