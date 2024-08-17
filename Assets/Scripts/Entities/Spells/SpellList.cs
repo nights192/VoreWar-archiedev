@@ -405,7 +405,7 @@ static class SpellList
             OnExecute = (a, t) =>
             {
                 a.CastOffensiveSpell(ForcePulse, t);
-                float pulseDamage = 3f;
+                float pulseDamage = 1.2f;
                 foreach (var splashTarget in TacticalUtilities.UnitsWithinTiles(t.Position, ForcePulse.AreaOfEffect))
                 {
                     TacticalUtilities.CheckSpellKnockBack(t.Position, a, splashTarget, ref pulseDamage);
@@ -418,7 +418,7 @@ static class SpellList
             OnExecuteTile = (a, l) =>
             {
                 a.CastOffensiveSpell(ForcePulse, null, l);
-                float pulseDamage = 3f;
+                float pulseDamage = 1.2f;
                 foreach (var splashTarget in TacticalUtilities.UnitsWithinTiles(l, ForcePulse.AreaOfEffect))
                 {
                     TacticalUtilities.CheckSpellKnockBack(l, a, splashTarget, ref pulseDamage);

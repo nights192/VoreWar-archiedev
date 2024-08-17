@@ -626,8 +626,7 @@ static class TacticalUtilities
             return;
         if (OpenTile(Attacker.GetTile(Target.Position, (direction + 7) % 8), Target))
             return;
-        Target.SubtractHealth((int)(damage * 1.2f));
-        Target.UnitSprite.DisplayDamage((int)(damage * 1.2f));
+        Target.Unit.TraitBoosts.Incoming.MagicDamage += ((int)(damage));
 
         return;
     }
