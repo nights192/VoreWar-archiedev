@@ -40,6 +40,7 @@
     Bloodrite = 28,
 
     ForcePulse = 35,
+    Trance = 36,
 
     AlraunePuff = 70,
     Web = 71,

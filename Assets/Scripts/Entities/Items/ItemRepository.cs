@@ -19,6 +19,7 @@ public enum ItemType
     FireBall,
     PowerBolt,
     LightningBolt,
+    ForcePulse,
     Shield,
     Mending,
     Speed,
@@ -28,8 +29,9 @@ public enum ItemType
     Pyre,
     //Warp
     //Magic Wall
-    Poison,
     Bloodrite,
+    Trance,
+    Poison,
     //Quicksand
     PreysCurse,
     Maw,
@@ -105,6 +107,7 @@ public class ItemRepository
             new SpellBook("Fireball Book", "Allows the casting of Fireball", 30, 1, SpellTypes.Fireball),
             new SpellBook("Power Bolt Book", "Allows the casting of Power Bolt", 30, 1, SpellTypes.PowerBolt),
             new SpellBook("Lightning Bolt Book", "Allows the casting of Lightning Bolt", 30, 1, SpellTypes.LightningBolt),
+            new SpellBook("Force Pulse Book", "Allows the casting of Force Pulse", 30, 1, SpellTypes.ForcePulse),
             new SpellBook("Shield Book", "Allows the casting of Shield", 30, 1, SpellTypes.Shield),
             new SpellBook("Mending Book", "Allows the casting of Mending", 30, 1, SpellTypes.Mending),
             new SpellBook("Speed Book", "Allows the casting of Speed", 30, 1, SpellTypes.Speed),
@@ -116,6 +119,7 @@ public class ItemRepository
             //new SpellBook("Magic Wall Book", "Allows the casting of Magic Wall", 60, 2, SpellTypes.MagicWall),           
             new SpellBook("Poison Book", "Allows the casting of Poison", 60, 2, SpellTypes.Poison),            
             new SpellBook("Bloodrite Book", "Allows the casting of Bloodrite", 60, 2, SpellTypes.Bloodrite),
+            new SpellBook("Trance Book", "Allows the casting of Trance", 60, 2, SpellTypes.Trance),
             //new SpellBook("Quicksand Book", "Allows the casting of Quicksand", 90, 3, SpellTypes.Quicksand),
             new SpellBook("Prey's Curse Book", "Allows the casting of Prey's Curse", 90, 3, SpellTypes.PreysCurse),
             new SpellBook("Maw Book", "Allows the casting of Maw", 90, 3, SpellTypes.Maw),

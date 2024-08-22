@@ -61,6 +61,7 @@ static class SpellList
     static internal readonly StatusSpell Poison;
     static internal readonly DamageSpell ForcePulse;
     static internal readonly StatusSpell Bloodrite;
+    static internal readonly StatusSpell Trance;
 
     //Quicksand
     static internal readonly StatusSpell PreysCurse;
@@ -390,12 +391,33 @@ static class SpellList
         };
         SpellDict[SpellTypes.Poison] = Poison;
 
+        Trance = new StatusSpell()
+        {
+            Name = "Trance",
+            Id = "trance",
+            SpellType = SpellTypes.Trance,
+            Description = "Puts target to sleep, duration scales with mind",
+            AcceptibleTargets = new List<AbilityTargets>() { AbilityTargets.Enemy },
+            Range = new Range(6),
+            Duration = (a, t) => 1 + a.Unit.GetStat(Stat.Mind) / 25,
+            Effect = (a, t) => 1,
+            Type = StatusEffectType.Sleeping,
+            Tier = 2,
+            Resistable = true,
+            OnExecute = (a, t) =>
+            {
+                if (a.CastStatusSpell(Trance, t))
+                    TacticalGraphicalEffects.CreateGenericMagic(a.Position, t.Position, t, TacticalGraphicalEffects.SpellEffectIcon.Debuff);
+            },
+        };
+        SpellDict[SpellTypes.Trance] = Trance;
+
         ForcePulse = new DamageSpell()
         {
             Name = "Force Pulse",
             Id = "forcepulse",
             SpellType = SpellTypes.ForcePulse,
-            Description = "Deals damage in an area and knocks back enemies",
+            Description = "Deals damage in an area and knocks back enemies. ALL enemies are effected even if the attack misses.",
             AcceptibleTargets = new List<AbilityTargets>() { AbilityTargets.Enemy, AbilityTargets.Tile },
             Range = new Range(6),
             AreaOfEffect = 1,
