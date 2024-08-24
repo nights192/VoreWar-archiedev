@@ -399,7 +399,7 @@ static class SpellList
             Description = "Puts target to sleep, duration scales with mind",
             AcceptibleTargets = new List<AbilityTargets>() { AbilityTargets.Enemy },
             Range = new Range(6),
-            Duration = (a, t) => 1 + a.Unit.GetStat(Stat.Mind) / 25,
+            Duration = (a, t) => 1 + a.Unit.GetStat(Stat.Mind) / 20,
             Effect = (a, t) => 1,
             Type = StatusEffectType.Sleeping,
             Tier = 2,
