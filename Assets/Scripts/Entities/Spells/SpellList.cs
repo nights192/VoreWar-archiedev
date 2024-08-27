@@ -62,6 +62,7 @@ static class SpellList
     static internal readonly DamageSpell ForcePulse;
     static internal readonly StatusSpell Bloodrite;
     static internal readonly StatusSpell Trance;
+    static internal readonly DamageSpell FlameWave;
 
     //Quicksand
     static internal readonly StatusSpell PreysCurse;
@@ -412,12 +413,40 @@ static class SpellList
         };
         SpellDict[SpellTypes.Trance] = Trance;
 
+        FlameWave = new DamageSpell()
+        {
+            Name = "Flame Wave",
+            Id = "FlameWave",
+            SpellType = SpellTypes.FlameWave,
+            Description = "Creates a 3 tile wide wall of flame next to the user",
+            AcceptibleTargets = new List<AbilityTargets>() { AbilityTargets.Enemy, AbilityTargets.Tile },
+            Range = new Range(1),
+            AOEType = AreaOfEffectType.RotatablePattern,
+            Tier = 1,
+            Pattern = new int[3, 3] { { 0, 0, 0 }, { 1, 1, 1 }, { 0, 0, 0 } },
+            Resistable = true,
+            Damage = (a, t) => 5 + a.Unit.GetStat(Stat.Mind) / 7,
+            OnExecute = (a, t) =>
+            {
+                a.CastOffensiveSpell(FlameWave, t);
+                TacticalGraphicalEffects.CreateFireBall(a.Position, t.Position, t);
+                TacticalUtilities.CreateEffectWithPattern(t.Position, a.Position, TileEffectType.Fire, 1 + a.Unit.GetStat(Stat.Mind) / 30, 4, FlameWave.Pattern, FlameWave.AOEType);
+            },
+            OnExecuteTile = (a, l) =>
+            {
+                a.CastOffensiveSpell(FlameWave, null, l);
+                TacticalGraphicalEffects.CreateFireBall(a.Position, l, null);
+                TacticalUtilities.CreateEffectWithPattern(l, a.Position, TileEffectType.Fire, 1 + a.Unit.GetStat(Stat.Mind) / 30, 4, FlameWave.Pattern, FlameWave.AOEType);
+            },
+        };
+        SpellDict[SpellTypes.FlameWave] = FlameWave;
+
         ForcePulse = new DamageSpell()
         {
             Name = "Force Pulse",
             Id = "forcepulse",
             SpellType = SpellTypes.ForcePulse,
-            Description = "Deals damage in an area and knocks back enemies. ALL enemies are effected even if the attack misses.",
+            Description = "Deals damage in an area and knocks back enemies. ALL enemies are knocked back even if the attack misses.",
             AcceptibleTargets = new List<AbilityTargets>() { AbilityTargets.Enemy, AbilityTargets.Tile },
             Range = new Range(6),
             AreaOfEffect = 1,
