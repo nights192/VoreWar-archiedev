@@ -42,6 +42,7 @@
     ForcePulse = 35,
     Trance = 36,
     FlameWave = 37,
+    SummonDoppelganger = 38,
 
     AlraunePuff = 70,
     Web = 71,

@@ -63,6 +63,7 @@ static class SpellList
     static internal readonly StatusSpell Bloodrite;
     static internal readonly StatusSpell Trance;
     static internal readonly DamageSpell FlameWave;
+    static internal readonly Spell SummonDoppelganger;
 
     //Quicksand
     static internal readonly StatusSpell PreysCurse;
@@ -595,6 +596,42 @@ static class SpellList
             },
         };
         SpellDict[SpellTypes.Summon] = Summon;
+
+
+        SummonDoppelganger = new Spell()
+        {
+            Name = "Summon Doppelganger",
+            Id = "summondoppelganger",
+            SpellType = SpellTypes.SummonDoppelganger,
+            Description = "Summons a feral copy of the caster at 50 % of the real caster’s experience.",
+            AcceptibleTargets = new List<AbilityTargets>() { AbilityTargets.Tile },
+            Range = new Range(4),
+            Tier = 3,
+            Resistable = false,
+            OnExecuteTile = (a, loc) =>
+            {
+                if (TacticalUtilities.OpenTile(loc, null) && a.CastSpell(SummonDoppelganger, null))
+                {
+                    Unit unit = new Unit(a.Unit.Side, a.Unit.Race, (int)(a.Unit.Experience * .50f), true, UnitType.Summon);
+                    unit.Name = a.Unit.Name;
+                    foreach (Traits trait in a.Unit.GetTraits)
+                    {
+                        unit.AddTrait(trait);
+                    }
+                    unit.CopyAppearance(a.Unit);
+                    unit.AddTrait(Traits.Feral);
+                    var actorCharm = a.Unit.GetStatusEffect(StatusEffectType.Charmed) ?? a.Unit.GetStatusEffect(StatusEffectType.Hypnotized);
+                    if (actorCharm != null)
+                    {
+                        unit.ApplyStatusEffect(StatusEffectType.Charmed, actorCharm.Strength, actorCharm.Duration);
+                    }
+                    StrategicUtilities.SpendLevelUps(unit);
+                    State.GameManager.TacticalMode.AddUnitToBattle(unit, loc);
+                    State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{a.Unit.Name}</b> has summoned a Doppelganger!");
+                }
+            },
+        };
+        SpellDict[SpellTypes.SummonDoppelganger] = SummonDoppelganger;
 
 
         Reanimate = new Spell()
