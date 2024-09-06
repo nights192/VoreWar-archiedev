@@ -628,6 +628,7 @@ static class SpellList
                     StrategicUtilities.SpendLevelUps(unit);
                     State.GameManager.TacticalMode.AddUnitToBattle(unit, loc);
                     State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"<b>{a.Unit.Name}</b> has summoned a Doppelganger!");
+                    State.GameManager.SoundManager.PlaySpellCast(Summon, a);
                 }
             },
         };
