@@ -486,7 +486,7 @@ static class SpellList
             Name = "Bloodrite",
             Id = "bloodrite",
             SpellType = SpellTypes.Bloodrite,
-            Description = "Target sacrifices 1/2 of their current hp for 250% damage for 10 turns",
+            Description = "Target sacrifices 1/2 of their current hp for 150% bonus melee damage and a 10% bonus ranged damage for 10 turns",
             AcceptibleTargets = new List<AbilityTargets>() { AbilityTargets.Self },
             Range = new Range(1),
             Tier = 0,

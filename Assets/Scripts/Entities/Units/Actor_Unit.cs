@@ -964,7 +964,7 @@ public class Actor_Unit
             }
             if (Unit.GetStatusEffect(StatusEffectType.Bloodrite) != null)
             {
-                damageScalar *= 2.5f;
+                damageScalar *= 1.1f;
             }
             if (target.Unit.GetStatusEffect(StatusEffectType.Shielded) != null)
             {
