@@ -2458,7 +2458,7 @@ public class StrategyMode : SceneBase
     {
         var box = Instantiate(State.GameManager.InputBoxPrefab).GetComponentInChildren<InputBox>();
         RenamingEmpire = ActingEmpire;
-        box.SetData(RenameEmpire, "Rename", "Cancel", $"Rename this empire ({ActingEmpire.Name})?", 20);
+        box.SetData(RenameEmpire, "Rename", "Cancel", $"Rename this empire ({ActingEmpire.Name})?", 75);
 
     }
 
