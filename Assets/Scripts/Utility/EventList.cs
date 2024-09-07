@@ -55,7 +55,7 @@ internal class EventList
             empire.RecentEvents = new List<int>();
         for (int i = 0; i < 20; i++)
         {
-            int val = State.Rand.Next(30);
+            int val = State.Rand.Next(31);
             if (i < 17 && empire.RecentEvents.Contains(val))
                 continue;
             if (Config.EventsRepeat == false && empire.EventHappened.ContainsKey(val))
@@ -1746,6 +1746,35 @@ internal class EventList
                         village.SubtractPopulation(1);
                         village.Happiness -= 5;
                         State.GameManager.CreateMessageBox($"Three kobolds are available for hire at {village.Name}");
+                    });
+                    UI.ThirdChoice.interactable = true;
+                }
+                break;
+            //Event Idea from DR.fetish on discord
+            case 30:
+                {
+                    if ((empire.Leader == null) || (empire.Leader.Race >= Race.Vagrants && empire.Leader.Race < Race.Selicia))
+                        return false;
+                    UI.MainText.text = $"A wandering smith of great renown has come from a far in search of {empire.Leader.Name}. The smith approaches {empire.Leader.Name} saying they wish to forge an enchanted weapon for {(empire.Leader.GetPronoun(1))} to support {(empire.Leader.GetPronoun(2))} cause. What does {empire.Leader.Name} do?";
+                    UI.FirstChoice.GetComponentInChildren<Text>().text = "Requests an enchanted ranged weapon";
+                    UI.FirstChoice.onClick.AddListener(() =>
+                    {
+                        State.GameManager.CreateMessageBox($"The smith appears slightly dissapointed to not make a melee weapon, but nonetheless begins to hold their hands out in front of themselves as a bright white orb materializes in front of them, then they clap their hands together; the orb disappearing within. Then, as the smith pulls their hands apart, {empire.Leader.Name} watches the magical weapon levitate from the smith directly into {(empire.Leader.GetPronoun(2))} hands.\n\nLeader Gains Tier 3 Ranged weapon the \"Omni Launcher\"");
+                        empire.Leader.Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.OmniLauncher);
+                    });
+                    UI.FirstChoice.interactable = true;
+                    UI.SecondChoice.GetComponentInChildren<Text>().text = "Requests an enchanted melee Weapon";
+                    UI.SecondChoice.onClick.AddListener(() =>
+                    {
+                        State.GameManager.CreateMessageBox($"The smith gets a big grin on their face then begins to hold their hands out in front of themselves as a bright white orb materializes in front of them, then they clap their hands together; the orb disappearing within. Then, as the smith pulls their hands apart, {empire.Leader.Name} watches the magical weapon levitate from the smith directly into {(empire.Leader.GetPronoun(2))} hands.\n\nLeader Gains Tier 3 Melee weapon the \"Omni Buster\"");
+                        empire.Leader.Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.OmniBuster);
+                    });
+                    UI.SecondChoice.interactable = true;
+                    UI.ThirdChoice.GetComponentInChildren<Text>().text = "Asks the smith for a \"Special request.\"";
+                    UI.ThirdChoice.onClick.AddListener(() =>
+                    {
+                        State.GameManager.CreateMessageBox($"The smith leans in, excited to hear what unique weapon {empire.Leader.Name} has in mind for them to make. However, just as the smith enters whispering range {empire.Leader.Name} easily swallows them whole! \"Don't worry. Look at it like this, you ARE still helpping my cause just... in a different way!\" {empire.Leader.Name} says as the smith wobbles in {(empire.Leader.GetPronoun(2))} belly. However, almost in reaction to the leader's remark {(empire.Leader.GetPronoun(2))} belly glows in a bright light then stops leaving {empire.Leader.Name} feeling as though {(empire.Leader.GetPronoun(0))} just had a grand feast, dispite only having one meal.\n\nLeader gains EXP");
+                        GiveExp(empire.Leader, 80, .07f);
                     });
                     UI.ThirdChoice.interactable = true;
                 }
