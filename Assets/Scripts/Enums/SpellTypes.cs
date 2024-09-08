@@ -61,7 +61,7 @@
     AssumeForm = 112,
     RevertForm = 113,
     ManaExpolsion = 114,
-
-
+    Conduit = 115,
+    Flamberge = 116,
 }
 
