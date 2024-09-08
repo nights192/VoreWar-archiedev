@@ -15,9 +15,10 @@ public enum ItemType
     Gloves,
     Shoes,
 
-    //FireBomb,
-
     Meditate,
+    //FireBomb,
+    Bolas,
+
     FireBall,
     PowerBolt,
     LightningBolt,
@@ -106,9 +107,10 @@ public class ItemRepository
             new Accessory(name:"Gloves", description:"+6 dexterity", cost:10, changedStat:(int)Stat.Dexterity, statBonus:6 ),
             new Accessory(name:"Shoes", description:"+2 agility, +1 movement tile", cost:6, changedStat:(int)Stat.Agility, statBonus:2),
 
+            new SpellBook("Meditate Book", "Allows the focusing of Mana mid-battle", 30, 1, SpellTypes.Meditate),
             //new SpellBook("Fire Bomb", "A belt of incendiary grenades", 60, 1, SpellTypes.FireBomb),
+            new SpellBook("Bolas", "A set of hunting bolas for stopping prey", 30, 1, SpellTypes.Bolas),
 
-            new SpellBook("Meditate Book", "Allows the focusing of Mana mid-battle", 40, 1, SpellTypes.Meditate),
             new SpellBook("Fireball Book", "Allows the casting of Fireball", 30, 1, SpellTypes.Fireball),
             new SpellBook("Power Bolt Book", "Allows the casting of Power Bolt", 30, 1, SpellTypes.PowerBolt),
             new SpellBook("Lightning Bolt Book", "Allows the casting of Lightning Bolt", 30, 1, SpellTypes.LightningBolt),
@@ -245,9 +247,9 @@ public class ItemRepository
         if (ignoreLimit == false)
             maxTier = UnityEngine.Mathf.Clamp(maxTier, 1, Config.MaxSpellLevelDrop);
         minTier = UnityEngine.Mathf.Clamp(minTier, 1, maxTier);
-        int min = (int)ItemType.FireBall;
+        int min = (int)ItemType.Bolas;
         int max = (int)ItemType.Resurrection;
-        if (minTier == 1) min = (int)ItemType.FireBall;
+        if (minTier == 1) min = (int)ItemType.Bolas;
         if (minTier == 2) min = (int)ItemType.IceBlast;
         if (minTier == 3) min = (int)ItemType.PreysCurse;
         if (minTier == 4) min = (int)ItemType.Diminishment;

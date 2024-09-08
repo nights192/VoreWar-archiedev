@@ -64,5 +64,7 @@
     Bloodrite = 32,
     /// <summary>Unit restores themselves 10 mana mid-battles</summary>
     Meditate = 33,
+    /// <summary>Movement is reduced to 1.</summary>
+    Snared = 34,
 }
 

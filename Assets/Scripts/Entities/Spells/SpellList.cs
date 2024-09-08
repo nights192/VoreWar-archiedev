@@ -64,6 +64,7 @@ static class SpellList
     static internal readonly StatusSpell Trance;
     static internal readonly DamageSpell FlameWave;
     static internal readonly DamageSpell FireBomb;
+    static internal readonly StatusSpell Bolas;
     static internal readonly Spell SummonDoppelganger;
 
     //Quicksand
@@ -468,6 +469,30 @@ static class SpellList
             },
         };
         SpellDict[SpellTypes.FireBomb] = FireBomb;
+
+        Bolas = new StatusSpell()
+        {
+            Name = "Bolas",
+            Id = "bolas",
+            SpellType = SpellTypes.Bolas,
+            Description = "Ensnares the target, lowering their movement to 1 for a few turns",
+            AcceptibleTargets = new List<AbilityTargets>() { AbilityTargets.Enemy },
+            Range = new Range(7),
+            Duration = (a, t) => 2,
+            Effect = (a, t) => 1,
+            Type = StatusEffectType.Snared,
+            Tier = 2,
+            Resistable = true,
+            ResistanceMult = 0.4f,
+            OnExecute = (a, t) =>
+            {
+                a.CastStatusSpell(Bolas, t);
+                TacticalGraphicalEffects.CreateBola(a.Position, t.Position, t);
+                State.GameManager.SoundManager.PlaySwing(a);
+            },
+
+        };
+        SpellDict[SpellTypes.Bolas] = Bolas;
 
         ForcePulse = new DamageSpell()
         {

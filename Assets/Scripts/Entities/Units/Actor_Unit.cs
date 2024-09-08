@@ -217,7 +217,7 @@ public class Actor_Unit
             Movement = 2;
             Slimed = false;
         }
-        else if (Unit.GetStatusEffect(StatusEffectType.Webbed) != null)
+        else if ((Unit.GetStatusEffect(StatusEffectType.Webbed) != null) || (Unit.GetStatusEffect(StatusEffectType.Snared) != null))
         {
             Movement = 1;
             Slimed = false;
