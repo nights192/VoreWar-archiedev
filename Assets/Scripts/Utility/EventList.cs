@@ -1753,7 +1753,7 @@ internal class EventList
             //Event Idea from DR.fetish on discord
             case 30:
                 {
-                    if ((empire.Leader == null) || (empire.Leader.Race >= Race.Vagrants && empire.Leader.Race < Race.Selicia))
+                    if ((empire.Leader == null) || (empire.Leader.Race >= Race.Vagrants))
                         return false;
                     UI.MainText.text = $"A wandering smith of great renown has come from a far in search of {empire.Leader.Name}. The smith approaches {empire.Leader.Name} saying they wish to forge an enchanted weapon for {(empire.Leader.GetPronoun(1))} to support {(empire.Leader.GetPronoun(2))} cause. What does {empire.Leader.Name} do?";
                     UI.FirstChoice.GetComponentInChildren<Text>().text = "Requests an enchanted ranged weapon";
