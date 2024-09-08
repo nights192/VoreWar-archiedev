@@ -408,6 +408,7 @@ static class SpellList
             Type = StatusEffectType.Sleeping,
             Tier = 2,
             Resistable = true,
+            ResistanceMult = 1.10f,
             OnExecute = (a, t) =>
             {
                 if (a.CastStatusSpell(Trance, t))
