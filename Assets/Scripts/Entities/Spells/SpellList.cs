@@ -63,6 +63,7 @@ static class SpellList
     static internal readonly StatusSpell Bloodrite;
     static internal readonly StatusSpell Trance;
     static internal readonly DamageSpell FlameWave;
+    static internal readonly DamageSpell FireBomb;
     static internal readonly Spell SummonDoppelganger;
 
     //Quicksand
@@ -430,17 +431,43 @@ static class SpellList
             OnExecute = (a, t) =>
             {
                 a.CastOffensiveSpell(FlameWave, t);
-                TacticalGraphicalEffects.CreateFireBall(a.Position, t.Position, t);
                 TacticalUtilities.CreateEffectWithPattern(t.Position, a.Position, TileEffectType.Fire, 1 + a.Unit.GetStat(Stat.Mind) / 30, 4, FlameWave.Pattern, FlameWave.AOEType);
+                State.GameManager.SoundManager.PlaySpellCast(Fireball, a);
             },
             OnExecuteTile = (a, l) =>
             {
                 a.CastOffensiveSpell(FlameWave, null, l);
-                TacticalGraphicalEffects.CreateFireBall(a.Position, l, null);
                 TacticalUtilities.CreateEffectWithPattern(l, a.Position, TileEffectType.Fire, 1 + a.Unit.GetStat(Stat.Mind) / 30, 4, FlameWave.Pattern, FlameWave.AOEType);
+                State.GameManager.SoundManager.PlaySpellCast(Fireball, a);
             },
         };
         SpellDict[SpellTypes.FlameWave] = FlameWave;
+
+        FireBomb = new DamageSpell()
+        {
+            Name = "Fire Bomb",
+            Id = "FireBomb",
+            SpellType = SpellTypes.FireBomb,
+            Description = "A heavy incendiary explosive that detonates in a cross pattern(Damage scales with Dexterity)",
+            AcceptibleTargets = new List<AbilityTargets>() { AbilityTargets.Enemy, AbilityTargets.Tile },
+            Range = new Range(5),
+            AOEType = AreaOfEffectType.FixedPattern,
+            Tier = 2,
+            Pattern = new int[3, 3] { { 0, 1, 0 }, { 1, 1, 1 }, { 0, 1, 0 } },
+            Resistable = true,
+            Damage = (a, t) => 8 + a.Unit.GetStat(Stat.Dexterity) / 9,
+            OnExecute = (a, t) =>
+            {
+                a.CastOffensiveSpell(FireBomb, t);
+                TacticalGraphicalEffects.CreateFireBomb(a.Position, t.Position, t);
+            },
+            OnExecuteTile = (a, l) =>
+            {
+                a.CastOffensiveSpell(FireBomb, null, l);
+                TacticalGraphicalEffects.CreateFireBomb(a.Position, l, null);
+            },
+        };
+        SpellDict[SpellTypes.FireBomb] = FireBomb;
 
         ForcePulse = new DamageSpell()
         {
@@ -466,6 +493,7 @@ static class SpellList
                 TacticalUtilities.CheckKnockBack(a, t, ref pulseDamage);
                 TacticalUtilities.KnockBack(a, t);
                 TacticalGraphicalEffects.CreateGenericMagic(a.Position, t.Position, t);
+                State.GameManager.SoundManager.PlaySpellCast(PowerBolt, a);
             },
             OnExecuteTile = (a, l) =>
             {
@@ -477,6 +505,7 @@ static class SpellList
                     TacticalUtilities.SpellKnockBack(l, a, splashTarget);
                 }
                 TacticalGraphicalEffects.CreateGenericMagic(a.Position, l, null);
+                State.GameManager.SoundManager.PlaySpellCast(PowerBolt, a);
             },
         };
         SpellDict[SpellTypes.ForcePulse] = ForcePulse;
