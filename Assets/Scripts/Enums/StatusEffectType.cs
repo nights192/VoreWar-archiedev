@@ -60,5 +60,9 @@
     Virus = 28,
     /// <summary>Unit has been embraced by the heavens, providing damage mitigation for a few turns</summary>
     DivineShield = 29,
+    /// <summary>Unit's melee damage is increased by 150% and ranged by 10%</summary>
+    Bloodrite = 32,
+    /// <summary>Movement is reduced to 1.</summary>
+    Snared = 33,
 }
 

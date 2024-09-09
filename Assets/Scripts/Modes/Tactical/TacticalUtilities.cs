@@ -615,6 +615,40 @@ static class TacticalUtilities
         return;
     }
 
+    static internal void CheckSpellKnockBack(Vec2i Knocker, Actor_Unit Attacker, Actor_Unit Target, ref float damage)
+    {
+        int xDiff = Target.Position.x - Knocker.x;
+        int yDiff = Target.Position.y - Knocker.y;
+        int direction = Attacker.DiffToDirection(xDiff, yDiff);
+        if (OpenTile(Attacker.GetTile(Target.Position, direction), Target))
+            return;
+        if (OpenTile(Attacker.GetTile(Target.Position, (direction + 1) % 8), Target))
+            return;
+        if (OpenTile(Attacker.GetTile(Target.Position, (direction + 7) % 8), Target))
+            return;
+        Target.Unit.TraitBoosts.Incoming.MagicDamage += ((int)(damage));
+
+        return;
+    }
+
+    static internal void SpellKnockBack(Vec2i Knocker, Actor_Unit Attacker, Actor_Unit Target)
+    {
+        int xDiff = Target.Position.x - Knocker.x;
+        int yDiff = Target.Position.y - Knocker.y;
+        int direction = Attacker.DiffToDirection(xDiff, yDiff);
+
+        Target.Movement += 1;
+        if (Target.Move(direction, tiles))
+            return;
+        else if (Target.Move((direction + 1) % 8, tiles))
+            return;
+        else if (Target.Move((direction + 7) % 8, tiles))
+            return;
+        Target.Movement -= 1;
+
+        return;
+    }
+
     static internal PredatorComponent GetPredatorComponentOfUnit(Unit unit)
     {
         foreach (Actor_Unit actor in Units)

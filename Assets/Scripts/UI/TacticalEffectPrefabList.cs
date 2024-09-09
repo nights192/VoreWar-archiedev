@@ -16,4 +16,6 @@ public class TacticalEffectPrefabList : MonoBehaviour
     public GameObject SmokeCloud;
     public GameObject HugeMagic;
     public GameObject MagicExplosion;
+    public GameObject FireBomb;
+    public GameObject Bola;
 }

@@ -217,7 +217,7 @@ public class Actor_Unit
             Movement = 2;
             Slimed = false;
         }
-        else if (Unit.GetStatusEffect(StatusEffectType.Webbed) != null)
+        else if ((Unit.GetStatusEffect(StatusEffectType.Webbed) != null) || (Unit.GetStatusEffect(StatusEffectType.Snared) != null))
         {
             Movement = 1;
             Slimed = false;
@@ -962,6 +962,10 @@ public class Actor_Unit
             {
                 damageScalar *= 1.2f;
             }
+            if (Unit.GetStatusEffect(StatusEffectType.Bloodrite) != null)
+            {
+                damageScalar *= 1.1f;
+            }
             if (target.Unit.GetStatusEffect(StatusEffectType.Shielded) != null)
             {
                 damageScalar *= 1 - target.Unit.GetStatusEffect(StatusEffectType.Shielded).Strength;
@@ -1003,6 +1007,10 @@ public class Actor_Unit
             if (Unit.HasTrait(Traits.WeaponChanneler) && Unit.Mana >= 6)
             {
                 damageScalar *= 1.2f;
+            }
+            if (Unit.GetStatusEffect(StatusEffectType.Bloodrite) != null)
+            {
+                damageScalar *= 2.5f;
             }
             if (target.Unit.GetStatusEffect(StatusEffectType.Shielded) != null)
             {

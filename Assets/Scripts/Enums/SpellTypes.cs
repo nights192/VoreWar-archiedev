@@ -37,8 +37,14 @@
     ManaFlux = 25,
     UnstableMana = 26,
     Meditate = 27,
+    Bloodrite = 28,
 
-
+    ForcePulse = 35,
+    Trance = 36,
+    FlameWave = 37,
+    SummonDoppelganger = 38,
+    FireBomb = 39,
+    Bolas = 40,
 
     AlraunePuff = 70,
     Web = 71,
