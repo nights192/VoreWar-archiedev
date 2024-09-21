@@ -14,7 +14,7 @@ public static class PreyLocStrings
 
     static readonly List<string> wombFluid = new List<string>() { "cum", "ejaculate", "honey", "fem-fluids", "fem-cum", "pussy juice", "girl-cum", "girl-fluids", "hot lube" };
     static readonly List<string> breastFluid = new List<string>() { "milk", "delicious milk", "leaking milk", "lactation", "nourishing fluid" };
-    static readonly List<string> ballsFluid = new List<string>() { "cum", "sperm", "semen", "jizz", "spunk", "seed", "nut", "spooge", "batter" };
+    static readonly List<string> ballsFluid = new List<string>() { "cum", "sperm", "semen", "jizz", "spunk", "seed", "nut", "spooge", "batter", "load" };
     static readonly List<string> stomachFluid = new List<string>() { "nutritious paste", "nutritious soup", "mush", "nutritious mush", "digestive juices", "chyme", "bubbling mush", "hot slurry", "meaty chunks", "stew", "melting flesh and bones" };
 
 

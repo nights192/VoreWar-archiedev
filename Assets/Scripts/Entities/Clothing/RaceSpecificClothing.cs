@@ -943,6 +943,28 @@ class LizardClothArmbands : MainClothing
     }
 }
 
+class LizardNoCrown : ClothingAccessory
+{
+    public LizardNoCrown()
+    {
+        leaderOnly = false;
+
+        clothing1 = new SpriteExtraInfo(10, null, WhiteColored);
+    }
+
+    public override void Configure(CompleteSprite sprite, Actor_Unit actor)
+    {
+        clothing1.GetSprite = (s) =>
+        {
+            if (actor.IsUnbirthing || actor.IsAnalVoring)
+                return null;
+            else 
+                return null;
+        };
+        base.Configure(sprite, actor);
+    }
+}
+
 class RainCoat : MainClothing
 {
     public RainCoat()
@@ -1380,6 +1402,9 @@ static class RaceSpecificClothing
     internal static LizardClothArmbands LizardClothArmbands = new LizardClothArmbands();
     //internal static LizardClothArmbands2 LizardClothArmbands2 = new LizardClothArmbands2();
     //internal static LizardClothArmbands3 LizardClothArmbands3 = new LizardClothArmbands3();
+
+    internal static LizardNoCrown LizardNoCrown = new LizardNoCrown();
+
     internal static RainCoat RainCoat = new RainCoat();
     internal static TigerSpecial TigerSpecial = new TigerSpecial();
     internal static CatLeader CatLeader = new CatLeader();
