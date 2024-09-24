@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.ExceptionServices;
+using UnityEngine;
 
 abstract class Trait
 {
@@ -319,6 +321,7 @@ static class TraitList
         [Traits.FasterAbsorption] = new Booster("Unit absorbs dead prey even more quickly. (200%)", (s) => s.Outgoing.AbsorptionRate *= 2f),
         [Traits.SlowerAbsorption] = new Booster("Unit absorbs dead prey even more slowly. (25%)", (s) => s.Outgoing.AbsorptionRate *= 0.25f),
         [Traits.SlowerMetabolism] = new Booster("Unit digests and absorbs prey very slowly. (25%)", (s) => { s.Outgoing.AbsorptionRate *= 0.25f; s.Outgoing.DigestionRate *= 0.25f; }),
+        [Traits.Insatiable] = new Insatiable(),
     };
 
 }
@@ -829,6 +832,40 @@ internal class ViralDigestion : VoreTrait
     public override bool OnRemove(Prey preyUnit, Actor_Unit predUnit, PreyLocation location)
     {
         preyUnit.Unit.ApplyStatusEffect(StatusEffectType.Virus, 3, 3);
+        return true;
+    }
+}
+
+internal class Insatiable : VoreTrait
+{
+    public Insatiable()
+    {
+        Description = "Unit is fighting a losing battle against an uncontrollable desire to devour everything surrounding them--will attempt to eat others around a meal occasionally.";
+    }
+
+    private bool triggered = false;
+    private static readonly float chance = 0.1f;
+
+    public override bool IsPredTrait => true;
+
+    public override int ProcessingPriority => 100;
+
+    public override bool OnSwallow(Prey preyUnit, Actor_Unit predUnit, PreyLocation location)
+    {
+        if (triggered || UnityEngine.Random.Range(0.0f, 1.0f) > chance)
+            return true;
+
+        triggered = true;
+        State.GameManager.TacticalMode.Log.RegisterMiscellaneous($"{predUnit.Unit.Name} yields to the hunger...");
+        foreach (Actor_Unit actor in TacticalUtilities.UnitsWithinTiles(predUnit.Position, 1))
+        {
+            if (actor != predUnit)
+            {
+                bool success = predUnit.PredatorComponent.Devour(actor);
+            }
+        }
+
+        triggered = false;
         return true;
     }
 }

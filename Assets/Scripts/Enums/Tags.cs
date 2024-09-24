@@ -513,7 +513,8 @@ public enum Traits
     /// <summary>Doubles unit's digestion rate.</summary>
     FasterDigestion = 279,
     /// <summary>Doubles unit's absorption rate.</summary>
-    FasterAbsorption = 280
+    FasterAbsorption = 280,
+    Insatiable = 400
 
 }
 

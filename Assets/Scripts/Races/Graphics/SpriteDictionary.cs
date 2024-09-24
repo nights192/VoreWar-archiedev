@@ -270,6 +270,7 @@ public class SpriteDictionary : MonoBehaviour
     
     [Header("Bosses")]
     public Sprite[] Abakhanskya;
+    public Sprite[] Brutus;
 
     [Header("Monsters")]
     public Sprite[] Vagrants;

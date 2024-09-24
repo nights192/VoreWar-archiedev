@@ -110,6 +110,7 @@ static class RaceParameters
     static readonly RaceTraits FeralFox;
     static readonly RaceTraits Terminid;
     static readonly RaceTraits FeralOrcas;
+    static readonly RaceTraits Brutus;
 
     static Unit tempUnit;
 
@@ -347,6 +348,8 @@ static class RaceParameters
                 return Terminid;
             case Race.FeralOrcas:
                 return FeralOrcas;
+            case Race.Brutus:
+                return Brutus;
             case (Race)700: //Singled out so that it doesn't make the debug message
                 return Default;
             case (Race)701:
@@ -3002,6 +3005,39 @@ static class RaceParameters
             RaceDescription = "A strange, almost draconic looking raptor. She seems to grow larger and stronger with each victim consumed. Despite having wings, they seem to only allow her to leap great distances instead of fly.",
         };
 
+        Brutus = new RaceTraits()
+        {
+            BodySize = 240,
+            StomachSize = 300,
+            HasTail = true,
+            FavoredStat = Stat.Stomach,
+            AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Anal },
+            ExpMultiplier = 20f,
+            PowerAdjustment = 100f,
+            RaceStats = new RaceStats()
+            {
+                Strength = new RaceStats.StatRange(50, 70),
+                Dexterity = new RaceStats.StatRange(25, 35),
+                Endurance = new RaceStats.StatRange(70, 100),
+                Mind = new RaceStats.StatRange(40, 50),
+                Will = new RaceStats.StatRange(40, 50),
+                Agility = new RaceStats.StatRange(15, 20),
+                Voracity = new RaceStats.StatRange(50, 75),
+                Stomach = new RaceStats.StatRange(50, 75),
+            },
+            RacialTraits = new List<Traits>()
+        {
+                Traits.Legendary,
+                Traits.Pounce,
+                Traits.ForcefulBlow,
+                Traits.Cruel,
+                Traits.EfficientGuts,
+                Traits.Ravenous,
+                Traits.Insatiable,
+        },
+            InnateSpells = new List<SpellTypes>() { SpellTypes.GateMaw },
+            RaceDescription = "Brutus.",
+        };
     }
 
 }

@@ -575,6 +575,8 @@ static class LogUtilities
                 return GetRandomStringFrom("raptor", "dino", "draco-raptor", "draconic raptor", "raptoress", "she-raptor");
             case Race.Zoey:
                 return GetRandomStringFrom("tiger shark", "anthro shark", "demi-shark");
+            case Race.Brutus:
+                return GetRandomStringFrom("dragon", "beast", "oversized reptile");
             default:
                 return "creature";
         }

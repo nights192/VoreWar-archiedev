@@ -111,6 +111,7 @@
     static internal FeralFox FeralFox = new FeralFox();
     static internal Terminid Terminid = new Terminid();
     static internal FeralOrcas FeralOrcas = new FeralOrcas();
+    static internal Brutus Brutus = new Brutus();
     static internal BlankSlate BlankSlate = new BlankSlate();
 
     static internal DefaultRaceData GetRace(Unit unit)
@@ -346,6 +347,8 @@
                 return Terminid;
             case Race.FeralOrcas:
                 return FeralOrcas;
+            case Race.Brutus:
+                return Brutus;
         }
         UnityEngine.Debug.LogWarning("Couldn't find race, substituting the Blank Slate");
         return BlankSlate;

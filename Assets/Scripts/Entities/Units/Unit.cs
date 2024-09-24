@@ -854,6 +854,16 @@ public class Unit
             }
             catch {}
         }
+        else if (race == Race.Brutus)
+        {
+            try
+            {
+                FixedGear = true;
+                Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.BrutusWeapon);
+                Items[1] = State.World.ItemRepository.GetSpecialItem(SpecialItems.BrutusArmor);
+            }
+            catch { }
+        }
         else
         {
             FixedGear = false;
