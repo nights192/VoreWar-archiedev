@@ -111,6 +111,7 @@ static class RaceParameters
     static readonly RaceTraits Terminid;
     static readonly RaceTraits FeralOrcas;
     static readonly RaceTraits Brutus;
+    static readonly RaceTraits Zeke;
 
     static Unit tempUnit;
 
@@ -350,6 +351,8 @@ static class RaceParameters
                 return FeralOrcas;
             case Race.Brutus:
                 return Brutus;
+            case Race.Zeke:
+                return Zeke;
             case (Race)700: //Singled out so that it doesn't make the debug message
                 return Default;
             case (Race)701:
@@ -3037,6 +3040,41 @@ static class RaceParameters
         },
             InnateSpells = new List<SpellTypes>() { SpellTypes.GateMaw },
             RaceDescription = "Brutus.",
+        };
+
+        Zeke = new RaceTraits()
+        {
+            BodySize = 10,
+            StomachSize = 15,
+            HasTail = true,
+            FavoredStat = Stat.Dexterity,
+            AllowedVoreTypes = new List<VoreType> { VoreType.Oral, VoreType.Anal },
+            ExpMultiplier = 2.4f,
+            PowerAdjustment = 5f,
+            RaceStats = new RaceStats()
+            {
+                Strength = new RaceStats.StatRange(6, 10),
+                Dexterity = new RaceStats.StatRange(10, 15),
+                Endurance = new RaceStats.StatRange(15, 20),
+                Mind = new RaceStats.StatRange(25, 30),
+                Will = new RaceStats.StatRange(20, 25),
+                Agility = new RaceStats.StatRange(24, 26),
+                Voracity = new RaceStats.StatRange(16, 20),
+                Stomach = new RaceStats.StatRange(11, 16),
+            },
+            RacialTraits = new List<Traits>()
+            {
+                Traits.ArcaneMagistrate,
+                Traits.SpellBlade,
+                Traits.ManaAttuned,
+                Traits.ManaRich,
+                Traits.Charmer,
+                Traits.Temptation,
+                Traits.ManaDrain
+            },
+            InnateSpells = new List<SpellTypes>()
+            { SpellTypes.AmplifyMagic, SpellTypes.Evocation, SpellTypes.ManaFlux, SpellTypes.UnstableMana, SpellTypes.Predation, SpellTypes.Enlarge },
+            RaceDescription = "Zeke.",
         };
     }
 

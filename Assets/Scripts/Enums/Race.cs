@@ -112,4 +112,5 @@
     Singularity = 184,
     Feit = 185,
     Brutus = 186,
+    Zeke = 187
 }

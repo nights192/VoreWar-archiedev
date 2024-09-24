@@ -864,6 +864,15 @@ public class Unit
             }
             catch { }
         }
+        else if (race == Race.Zeke)
+        {
+            try
+            {
+                FixedGear = true;
+                Items[0] = State.World.ItemRepository.GetSpecialItem(SpecialItems.ZekeWeapon);
+            }
+            catch { }
+        }
         else
         {
             FixedGear = false;
