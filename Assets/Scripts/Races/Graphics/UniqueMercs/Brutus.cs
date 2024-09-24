@@ -16,6 +16,7 @@ class Brutus : BlankSlate
     {
         base.RandomCustom(unit);
         unit.Name = "Brutus";
+        unit.BodySize = 0;
     }
 
     protected override Sprite BodySprite(Actor_Unit actor)
